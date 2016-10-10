@@ -3,31 +3,28 @@ import sys
 todo = []
 mark = []
 
-length = len(sys.argv)
+first = input("Please specify a command [list, add, mark, archive]: ")
 
 def add():
+    print("add")
 
 def show():
+    print("show")
 
 def mark():
+    print("mark")
 
 def archive():
+    print("archive")
 
-
-if length < 2:
-    exit
-
-if length == 2 and sys.argv[1] == "add":
+if first == "add":
     add() 
 
-if length == 2 and sys.argv[1] == "list":
+if first == "list":
     show()  
 
-if length == 2 and sys.argv[1] == "mark":
+if first == "mark":
     mark()  
 
-if length == 2 and sys.argv[1] == "archive":
+if first == "archive":
     archive()  
-
-if length > 2 
-        print("Please insert a number!")

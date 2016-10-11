@@ -16,19 +16,19 @@ if os.stat("todo.txt").st_size != 0:
 
 first = input("Please specify a command [list, add, mark, archive]: ")
 
-def add():
+def add(marks,todo):
     item = input("Add an item: ")
     todo.append(item)
     marks.append("[ ]")
     print("Item added.")
-    show()
+    show(marks,todo)
 
-def show():
+def show(marks,todo):
     for i in (range(len(todo))):
         print(i+1, "\b.", marks[i], todo[i])
 
-def mark(todo, marks):
-    show()
+def mark(marks,todo):
+    show(marks,todo)
     completed_mark = input("Which one you want to mark as completed: ")
     completed_mark = int(completed_mark)
     if (0 < completed_mark) and (len(marks) >= completed_mark):
@@ -37,28 +37,36 @@ def mark(todo, marks):
     else:
         print("Please enter valid number!")
    
-def archive():
+def archive(marks,todo):
     print("All completed tasks got deleted.")
     for id, line in enumerate(marks):
         if line == "[*]":
             marks.pop(id)
             todo.pop(id)
+        if line == "[*]" and id == 0:
+            print("hoppá")
+            marks[:] = []
+            todo[:] = []
 
 if first == "add":
-    add() 
+    add(marks,todo) 
 
 if first == "list":
-    show()  
+    show(marks,todo)  
 
 if first == "mark":
-     mark(todo, marks)
+     mark(marks,todo)
 
 if first == "archive":
-    archive() 
-    show()
+    archive(marks,todo) 
+    show(marks,todo)
 
 if len(todo) != 0 :
     with open("todo.txt", "wb") as output:
         pickle.dump(todo, output)
     with open("marks.txt", "wb") as output:
         pickle.dump(marks, output)
+
+if len(todo) == 0 :
+    os.remove("todo.txt")
+    os.remove("marks.txt")

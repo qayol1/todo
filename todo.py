@@ -1,13 +1,18 @@
 import pickle
+import os
 
 todo = []
 marks = []
 
-with open("todo.txt", "rb") as data:
-    todo = pickle.load(data)
+if os.path.isfile("todo.txt")==False:
+    f1 = open("todo.txt","a")
+    f2 = open("marks.txt", "a")
 
-with open("marks.txt", "rb") as data:
-    marks = pickle.load(data)
+if os.stat("todo.txt").st_size != 0:
+    with open("todo.txt", "rb") as data:
+        todo = pickle.load(data)
+    with open("marks.txt", "rb") as data:
+        marks = pickle.load(data)
 
 first = input("Please specify a command [list, add, mark, archive]: ")
 
@@ -19,7 +24,8 @@ def add():
     show()
 
 def show():
-    print(todo, marks)
+    for i in (range(len(todo))):
+        print(i+1, "\b.", marks[i], todo[i])
 
 def mark(todo, marks):
     show()
@@ -51,9 +57,8 @@ if first == "archive":
     archive() 
     show()
 
-
-with open("todo.txt", "wb") as output:
-    pickle.dump(todo, output)
-
-with open("marks.txt", "wb") as output:
-    pickle.dump(marks, output)
+if len(todo) != 0 :
+    with open("todo.txt", "wb") as output:
+        pickle.dump(todo, output)
+    with open("marks.txt", "wb") as output:
+        pickle.dump(marks, output)

@@ -26,6 +26,10 @@ def show(marks,todo):
     if len(todo) == 0 :
         print("The todo list is empty.")
     else:
+        if len(todo) > 1 :
+            print("You saved the following todo items:")
+        else:
+            print("You saved the following todo item:")
         for i in (range(len(todo))):
             print(i+1, "\b.", marks[i], todo[i])
 
@@ -42,13 +46,12 @@ def mark(marks,todo):
    
 def archive(marks,todo):
     print("All completed tasks got deleted.")
-    for id, line in enumerate(marks):
-        if line == "[*]":
-            marks.pop(id)
-            todo.pop(id)
-        if line == "[*]" and id == 0 and len(marks) == 0:
-            marks[:] = []
-            todo[:] = []
+    i = len(marks)
+    while i > 0 :
+        if marks[i-1] == "[*]":
+            marks.pop(i-1)
+            todo.pop(i-1)
+        i = i-1
 
 if first == "add":
     add(marks,todo) 

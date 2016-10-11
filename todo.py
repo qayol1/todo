@@ -24,8 +24,11 @@ def add(marks,todo):
     show(marks,todo)
 
 def show(marks,todo):
-    for i in (range(len(todo))):
-        print(i+1, "\b.", marks[i], todo[i])
+    if len(todo) == 0 :
+        print("The todo list is empty.")
+    else:
+        for i in (range(len(todo))):
+            print(i+1, "\b.", marks[i], todo[i])
 
 def mark(marks,todo):
     show(marks,todo)
@@ -44,7 +47,6 @@ def archive(marks,todo):
             marks.pop(id)
             todo.pop(id)
         if line == "[*]" and id == 0:
-            print("hoppá")
             marks[:] = []
             todo[:] = []
 

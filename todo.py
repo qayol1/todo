@@ -21,7 +21,6 @@ def add(marks,todo):
     todo.append(item)
     marks.append("[ ]")
     print("Item added.")
-    show(marks,todo)
 
 def show(marks,todo):
     if len(todo) == 0 :
@@ -37,6 +36,7 @@ def mark(marks,todo):
     if (0 < completed_mark) and (len(marks) >= completed_mark):
         marks[completed_mark-1] = '[*]'
         print(todo[completed_mark-1], 'is completed')
+        show(marks,todo)
     else:
         print("Please enter valid number!")
    
@@ -46,12 +46,13 @@ def archive(marks,todo):
         if line == "[*]":
             marks.pop(id)
             todo.pop(id)
-        if line == "[*]" and id == 0:
+        if line == "[*]" and id == 0 and len(marks) == 0:
             marks[:] = []
             todo[:] = []
 
 if first == "add":
     add(marks,todo) 
+    show(marks,todo)
 
 if first == "list":
     show(marks,todo)  
